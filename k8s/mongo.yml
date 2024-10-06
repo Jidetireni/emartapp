@@ -34,7 +34,7 @@ spec:
                 key: MONGO_INITDB_DATABASE
       volumes:
         - name: emongo-storage
-          PersistentVolumeClaim: 
+          persistentVolumeClaim: 
             claimName: emongo-pvc
 ---
 apiVersion: v1
