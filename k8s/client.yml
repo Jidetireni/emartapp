@@ -21,7 +21,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: emartclient-port 
+          - name: client-port 
             containerPort: 4200
       initContainers:
         - name: init-api
@@ -41,6 +41,6 @@ spec:
     app: emartclient
   ports:
   - port: 4200
-    targetPort: emartclient-port
+    targetPort: client-port
     protocol: TCP
   type: ClusterIP
