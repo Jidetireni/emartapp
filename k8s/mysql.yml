@@ -39,7 +39,7 @@ spec:
                 key: MYSQL_ROOT_PASSWORD          
       volumes:
         - name: emartdb-storage
-          PersistentVolumeClaim: 
+          persistentVolumeClaim: 
             claimName: emartdb-pvc
 ---
 apiVersion: v1
@@ -52,7 +52,7 @@ spec:
     app: emartmysql
   ports:
   - port: 27017
-    targetPort: emongo-port
+    targetPort: emartdb-port
     protocol: TCP
   type: ClusterIP
 ---
