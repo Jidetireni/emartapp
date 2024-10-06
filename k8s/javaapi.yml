@@ -21,7 +21,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: emartwebapi-port
+          - name: webapi-port
             containerPort: 9000
       initContainers:
         - name: init-emartdb
@@ -38,6 +38,6 @@ spec:
     app: emartwebapi
   ports:
   - port: 9000
-    targetPort: emartwebapi-port
+    targetPort: webapi-port
     protocol: TCP
   type: ClusterIP
