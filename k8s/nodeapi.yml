@@ -21,7 +21,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: emartapi-port
+          - name: api-port
             containerPort: 5000 
       initContainers:
         - name: init-emongo 
@@ -42,6 +42,6 @@ spec:
     app: myapp
   ports:
     - port: 5000
-      targetPort: emartapi-port
+      targetPort: api-port
       protocol: TCP
   type: ClusterIP
