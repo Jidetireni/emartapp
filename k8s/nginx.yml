@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
+  namespace: emartapp-ns
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: emartnginx
@@ -19,13 +21,13 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: emartnginx-port
+          - name: nginx-port
             containerPort: 80
-      volumeMounts:
-        - name: nginx-files
-          mountPath: /etc/nginx/conf.d/default.conf
+        volumeMounts:
+          - name: nginx-files
+            mountPath: /etc/nginx/conf.d/default.conf
       volumes:
-      - name: angular-static-files
+      - name: nginx-files
         hostPath:
           path: ../nginx/default.conf
 ---
@@ -33,11 +35,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx
+  namespace: emartapp-ns
 spec:
   selector:
     app: emartnginx
   ports:
   - port: 80
-    targetPort: emart-nginx-port 
+    targetPort: nginx-port 
     protocol: TCP
   type: LoadBalancer
