@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-cret
+  namespace: emartapp-ns
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: {{ZW1hcnRkYnBhc3M=}} 
+  MONGO_INITDB_DATABASE: {{ZXBvYw==}} 
+  MYSQL_DATABASE: {{Ym9va3M=}}
