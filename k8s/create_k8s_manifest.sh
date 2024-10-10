@@ -302,6 +302,7 @@ spec:
         volumeMounts:
           - name: nginx-config-volume
             mountPath: /etc/nginx/conf.d/default.conf
+            subPath: default.conf
       volumes:
       - name: nginx-config-volume
         configMap:
