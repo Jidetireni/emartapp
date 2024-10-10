@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: nginx-config
 data:
-  defualt.conf: |
+  default.conf: |
     #upstream api {
     #    server api:5000; 
     #}
