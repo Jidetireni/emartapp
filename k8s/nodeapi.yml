@@ -16,21 +16,20 @@ spec:
       containers:
       - name: emartapp-api  
         image: tireni/emartapp-api
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
           - name: api-port
             containerPort: 5000 
-      initContainers:
-        - name: init-emongo 
-          image: busybox
-          command: ['sh', '-c', 'until nslookup emongo.emartapp-ns.svc.cluster.local ; do echo waiting for mydb; sleep 2; done']
-        - name: init-nginx
-          image: busybox
-          command: ['sh', '-c', 'until nslookup nginx.emartapp-ns.svc.cluster.local ; do echo waiting for mydb; sleep 2; done']
-        
+      # initContainers:
+      #   - name: init-emongo 
+      #     image: busybox
+      #     command: ['sh', '-c', 'until nslookup emongo.emartapp-ns.svc.cluster.local ; do echo waiting for mydb; sleep 2; done']
+      #   - name: init-nginx
+      #     image: busybox
+      #     command: ['sh', '-c', 'until nslookup nginx.emartapp-ns.svc.cluster.local ; do echo waiting for mydb; sleep 2; done']
 ---
 apiVersion: v1
 kind: Service

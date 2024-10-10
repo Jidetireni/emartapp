@@ -7,35 +7,35 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: emartmysql
+      app: emartdb
   template:
     metadata:
       labels:
-        app: emartmysql
+        app: emartdb
     spec:
       containers:
       - name: mysql
-        image: tireni/emartmysql
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        image: mysql:8.0.33
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         volumeMounts:
-          - mountPath: /var/lib/mysql  
-            name: emartdb-storage        
+          - name: emartdb-storage
+            mountPath: /var/lib/mysql               
         ports:
           - name: emartdb-port 
-            containerPort: 27017
+            containerPort: 3306
         env:
           - name: MYSQL_DATABASE
             valueFrom:
-              configMapKeyRef:
-                name: emartdb-cm
+              secretKeyRef:
+                name: db-cret
                 key: MYSQL_DATABASE
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: emartdb-cret
+                name: db-cret
                 key: MYSQL_ROOT_PASSWORD          
       volumes:
         - name: emartdb-storage
@@ -45,42 +45,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emongo
+  name: emartdb
   namespace: emartapp-ns
 spec:
   selector:
     app: emartmysql
   ports:
-  - port: 27017
+  - port: 3306
     targetPort: emartdb-port
     protocol: TCP
   type: ClusterIP
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: emartdb-cm
-  namespace: emartapp-ns
-data:
-  MYSQL_DATABASE: books
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: emartdb-cret
-type: Opaque
-data:
-  MYSQL_ROOT_PASSWORD: ZW1hcnRkYnBhc3M=
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: emartdb-pvc
-  namespace: emartapp-ns
-spec:
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi

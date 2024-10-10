@@ -16,20 +16,20 @@ spec:
       containers:
       - name: emart-nginx
         image: nginx:alpine-slim
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
         ports:
           - name: nginx-port
             containerPort: 80
         volumeMounts:
-          - name: nginx-files
+          - name: nginx-config-volume
             mountPath: /etc/nginx/conf.d/default.conf
       volumes:
-      - name: nginx-files
-        hostPath:
-          path: ../nginx/default.conf
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config
 ---
 apiVersion: v1
 kind: Service
