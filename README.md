@@ -1,5 +1,3 @@
----
-
 # EmartApp
 
 **EmartApp** is an e-commerce web application designed using a microservices architecture that integrates multiple services seamlessly. 
@@ -67,5 +65,3 @@ To set up the Minikube environment, ensure you have Minikube installed on your l
    ```bash
    kubectl get all -n emartapp-ns
    ```
-
---- 
