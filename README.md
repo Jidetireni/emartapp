@@ -40,7 +40,7 @@ docker compose up -d
 
 #### Minikube Local Cluster Deployment
 
-- Created manifest files for each service, including deployments for pods and services for each object to communicate with each other in the cluster.
+- Created manifest files for each service, including deployments for pods and services for each object to communicate with each other within the cluster.
 - Utilized Kubernetes Secrets for sensitive information, Persistent Volume Claims (PVC) for data persistence, and ConfigMaps for Nginx API Gateway configuration.
 
 You can check all the manifests in the `emartapp/k8s` directory. A dedicated namespace, `emartapp-ns`, is used to group all objects together. 
